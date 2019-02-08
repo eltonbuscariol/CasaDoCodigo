@@ -10,8 +10,9 @@ import br.com.caelum.casadocodigo.R
 import br.com.caelum.casadocodigo.modelo.Livro
 import butterknife.BindView
 import butterknife.ButterKnife
+import com.squareup.picasso.Picasso
 
-class LivrosAdapter(private val livros: List<Livro>, private val clickListener: (Livro) -> Unit) : RecyclerView.Adapter<LivrosAdapter.ViewHolder>() {
+class LivroAdapter(private val livros: List<Livro>, private val clickListener: (Livro) -> Unit) : RecyclerView.Adapter<LivroAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -52,6 +53,11 @@ class LivrosAdapter(private val livros: List<Livro>, private val clickListener: 
         fun bind(livro: Livro, clickListener: (Livro) -> Unit) {
             nomeLivro.text = livro.nome
             itemView.setOnClickListener { clickListener(livro) }
+            Picasso.with(this.fotoLivro.context)
+                    .load(livro.urlFoto)
+                    .placeholder(R.drawable.livro)
+
+                    .into(this.fotoLivro)
         }
     }
 }

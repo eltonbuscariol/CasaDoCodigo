@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import br.com.caelum.casadocodigo.R
 import br.com.caelum.casadocodigo.modelo.Livro
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_detalhes_livro.view.*
 
 class DetalhesLivroFragment : Fragment() {
@@ -26,6 +27,7 @@ class DetalhesLivroFragment : Fragment() {
     private fun populaCamposCom(view: View?, livro: Livro) {
         view?.let {
             view.detalhes_livro_nome.text = livro.nome
+            Picasso.with(context).load(livro.urlFoto).placeholder(R.drawable.livro).into(view.detalhes_livro_foto)
         }
     }
 }

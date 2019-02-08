@@ -8,13 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import br.com.caelum.casadocodigo.R
-import br.com.caelum.casadocodigo.adapter.LivrosAdapter
-import br.com.caelum.casadocodigo.modelo.Autor
+import br.com.caelum.casadocodigo.activity.MainActivity
+import br.com.caelum.casadocodigo.adapter.LivroAdapter
+import br.com.caelum.casadocodigo.client.LivroWebClient
+import br.com.caelum.casadocodigo.listener.EndlessListListener
 import br.com.caelum.casadocodigo.modelo.Livro
 import butterknife.BindView
 import butterknife.ButterKnife
 
 class ListaLivrosFragment : Fragment() {
+
+    private val livros = arrayListOf<Livro>()
 
     @BindView(R.id.lista_livros)
     lateinit var recyclerView: RecyclerView
@@ -22,18 +26,9 @@ class ListaLivrosFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_lista_livros, container, false)
 
-        val livros = mutableListOf<Livro>()
-
-        for (i in 1..6) {
-            val autor = Autor()
-            autor.nome = "Autor $i"
-            val livro = Livro("Livro $i", "Descricao $i", listOf(autor))
-            livros.add(livro)
-        }
-
         ButterKnife.bind(this, view)
 
-        recyclerView.adapter = LivrosAdapter(livros) { livro: Livro -> handlerBook(livro) }
+        recyclerView.adapter = LivroAdapter(livros) { livro: Livro -> handlerBook(livro) }
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         return view
@@ -51,5 +46,16 @@ class ListaLivrosFragment : Fragment() {
 
     }
 
+    fun populaListaCom(livrosLista: List<Livro>) {
+        this.livros.addAll(livrosLista)
+        recyclerView.adapter?.notifyDataSetChanged()
+        recyclerView.addOnScrollListener(object : EndlessListListener() {
+            override fun carregaMaisItens() {
+                val mainActivity = context as MainActivity
+
+                LivroWebClient(mainActivity).getLivros(livros.size, 10)
+            }
+        })
+    }
 
 }
