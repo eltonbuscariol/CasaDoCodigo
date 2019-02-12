@@ -36,7 +36,7 @@ class ListaLivrosFragment : Fragment() {
 
     private fun handlerBook(livro: Livro) {
         val arguments = Bundle()
-        arguments.putParcelable("livro", livro)
+        arguments.putSerializable("livro", livro)
         val detalhesLivroFragment = DetalhesLivroFragment()
         detalhesLivroFragment.arguments = arguments
         val transaction = fragmentManager!!.beginTransaction()

@@ -1,8 +1,11 @@
 package br.com.caelum.casadocodigo.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 
 import br.com.caelum.casadocodigo.R
@@ -25,6 +28,19 @@ class MainActivity : AppCompatActivity(), LivrosDelegate {
         transaction.commit()
 
         LivroWebClient(this).getLivros(0, 10)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.vai_para_carrinho){
+            val intent = Intent(this, CarrinhoActivity::class.java)
+            startActivity(intent)
+        }
+        return true
     }
 
     override fun lidaComSucesso(livros: List<Livro>) {

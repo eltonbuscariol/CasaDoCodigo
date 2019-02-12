@@ -1,11 +1,9 @@
 package br.com.caelum.casadocodigo.modelo
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 
-@Parcelize
-class Livro() : Parcelable {
+
+class Livro() : Serializable {
 
     var id: Long = 0
     var nome: String? = null
