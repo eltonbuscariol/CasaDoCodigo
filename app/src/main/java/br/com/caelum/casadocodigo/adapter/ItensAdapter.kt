@@ -11,6 +11,7 @@ import android.widget.TextView
 import br.com.caelum.casadocodigo.R
 import br.com.caelum.casadocodigo.modelo.Item
 import br.com.caelum.casadocodigo.modelo.TipoDeCompra
+import com.squareup.picasso.Picasso
 
 class ItensAdapter(private val items: List<Item>, private val context: Context) : RecyclerView.Adapter<ItensAdapter.ViewHolder>() {
 
@@ -30,6 +31,10 @@ class ItensAdapter(private val items: List<Item>, private val context: Context) 
 
         holder.nomeItem.text = item.livro.nome
         holder.valorComprado.text = valorComprado
+        Picasso.with(holder.fotoLivro.context)
+                .load(item.livro.urlFoto)
+                .placeholder(R.drawable.livro)
+                .into(holder.fotoLivro)
     }
 
     private fun retornaValorCompradoDo(item: Item): String {

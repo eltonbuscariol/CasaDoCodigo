@@ -13,6 +13,8 @@ import br.com.caelum.casadocodigo.client.LivroWebClient
 import br.com.caelum.casadocodigo.delegate.LivrosDelegate
 import br.com.caelum.casadocodigo.fragment.ListaLivrosFragment
 import br.com.caelum.casadocodigo.modelo.Livro
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 
 class MainActivity : AppCompatActivity(), LivrosDelegate {
 
@@ -21,6 +23,15 @@ class MainActivity : AppCompatActivity(), LivrosDelegate {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val remoteConfig = FirebaseRemoteConfig.getInstance()
+        remoteConfig.setDefaults(R.xml.remote_config_defaults)
+
+        remoteConfig.fetch(15).addOnCompleteListener { task ->
+            if (task.isSuccessful){
+                remoteConfig.activateFetched()
+            }
+        }
 
         listaLivrosFragment = ListaLivrosFragment()
         val transaction = supportFragmentManager.beginTransaction()
@@ -36,9 +47,18 @@ class MainActivity : AppCompatActivity(), LivrosDelegate {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == R.id.vai_para_carrinho){
-            val intent = Intent(this, CarrinhoActivity::class.java)
-            startActivity(intent)
+        when(item?.itemId){
+            R.id.vai_para_carrinho -> {
+                val intent = Intent(this, CarrinhoActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.menu_item_logout -> {
+                val firebaseAuth = FirebaseAuth.getInstance()
+                firebaseAuth.signOut()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
         }
         return true
     }

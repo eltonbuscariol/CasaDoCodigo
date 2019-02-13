@@ -7,5 +7,8 @@
         android:icon="@drawable/carrinho_vazio"
         android:title="Carrinho"
         app:showAsAction="always" />
+    <item android:id="@+id/menu_item_logout"
+        android:title="Sair"
+        app:showAsAction="always"/>
 
 </menu>

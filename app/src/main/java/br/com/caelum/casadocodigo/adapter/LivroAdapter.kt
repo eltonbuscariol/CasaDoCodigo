@@ -12,14 +12,16 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.squareup.picasso.Picasso
 
-class LivroAdapter(private val livros: List<Livro>, private val clickListener: (Livro) -> Unit) : RecyclerView.Adapter<LivroAdapter.ViewHolder>() {
+class LivroAdapter(private val livros: List<Livro>, private val listType : Boolean, private val clickListener: (Livro) -> Unit) : RecyclerView.Adapter<LivroAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         var tipoLayout = R.layout.item_livro_par
 
-        if (viewType % 2 != 0) {
-            tipoLayout = R.layout.item_livro_impar
+        if (listType) {
+            if (viewType % 2 != 0) {
+                tipoLayout = R.layout.item_livro_impar
+            }
         }
 
         val view = LayoutInflater.from(parent.context).inflate(tipoLayout, parent, false)

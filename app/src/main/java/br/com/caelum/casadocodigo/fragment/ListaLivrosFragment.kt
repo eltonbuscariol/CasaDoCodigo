@@ -15,6 +15,7 @@ import br.com.caelum.casadocodigo.listener.EndlessListListener
 import br.com.caelum.casadocodigo.modelo.Livro
 import butterknife.BindView
 import butterknife.ButterKnife
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 
 class ListaLivrosFragment : Fragment() {
 
@@ -28,7 +29,10 @@ class ListaLivrosFragment : Fragment() {
 
         ButterKnife.bind(this, view)
 
-        recyclerView.adapter = LivroAdapter(livros) { livro: Livro -> handlerBook(livro) }
+        val remoteConfig = FirebaseRemoteConfig.getInstance()
+        val listType = remoteConfig.getBoolean("list_type_single_item")
+
+        recyclerView.adapter = LivroAdapter(livros, listType) { livro: Livro -> handlerBook(livro) }
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         return view
