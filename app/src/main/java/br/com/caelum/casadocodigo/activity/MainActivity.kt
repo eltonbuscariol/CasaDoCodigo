@@ -2,7 +2,6 @@ package br.com.caelum.casadocodigo.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -10,13 +9,16 @@ import android.widget.Toast
 
 import br.com.caelum.casadocodigo.R
 import br.com.caelum.casadocodigo.client.LivroWebClient
-import br.com.caelum.casadocodigo.delegate.LivrosDelegate
+import br.com.caelum.casadocodigo.event.LivroEvent
+import br.com.caelum.casadocodigo.event.NotificationEvent
 import br.com.caelum.casadocodigo.fragment.ListaLivrosFragment
-import br.com.caelum.casadocodigo.modelo.Livro
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
-class MainActivity : AppCompatActivity(), LivrosDelegate {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var listaLivrosFragment : ListaLivrosFragment
 
@@ -38,7 +40,19 @@ class MainActivity : AppCompatActivity(), LivrosDelegate {
         transaction.replace(R.id.frame_principal, listaLivrosFragment)
         transaction.commit()
 
-        LivroWebClient(this).getLivros(0, 10)
+        LivroWebClient().getLivros(0, 10)
+
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -63,12 +77,19 @@ class MainActivity : AppCompatActivity(), LivrosDelegate {
         return true
     }
 
-    override fun lidaComSucesso(livros: List<Livro>) {
-        listaLivrosFragment.populaListaCom(livros)
+    @Subscribe
+    fun lidaComSucesso(livroEvent: LivroEvent) {
+        listaLivrosFragment.populaListaCom(livroEvent.getLivros())
     }
 
-    override fun lidaComFalha(throwable: Throwable) {
+    @Subscribe
+    fun lidaComFalha(throwable: Throwable) {
         Toast.makeText(this, "Não foi possível carregar os livros -> ${throwable.localizedMessage}", Toast.LENGTH_SHORT).show()
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun receberNotificacao(notificationEvent: NotificationEvent){
+        Toast.makeText(this, "Recebeu uma notificação do servidor", Toast.LENGTH_SHORT).show()
     }
 
 }

@@ -55,9 +55,8 @@ class ListaLivrosFragment : Fragment() {
         recyclerView.adapter?.notifyDataSetChanged()
         recyclerView.addOnScrollListener(object : EndlessListListener() {
             override fun carregaMaisItens() {
-                val mainActivity = context as MainActivity
 
-                LivroWebClient(mainActivity).getLivros(livros.size, 10)
+                LivroWebClient().getLivros(livros.size, 10)
             }
         })
     }
