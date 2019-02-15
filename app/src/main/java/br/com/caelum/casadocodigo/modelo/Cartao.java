@@ -61,4 +61,6 @@ public class Cartao implements Serializable {
     public void setValidade(String validade) {
         this.validade = validade;
     }
+
+    
 }

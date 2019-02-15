@@ -24,7 +24,7 @@ class CarrinhoActivity : AppCompatActivity() {
         app?.let { app.getComponent().inject(this) }
 
         fab_carrinho.setOnClickListener {
-            val intent = Intent(this, CartaoActivity::class.java)
+            val intent = Intent(it.context, CartaoActivity::class.java)
             startActivity(intent)
         }
     }
