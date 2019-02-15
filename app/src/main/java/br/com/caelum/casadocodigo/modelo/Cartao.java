@@ -7,6 +7,7 @@ import org.greenrobot.greendao.annotation.Generated;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 @Entity
 public class Cartao implements Serializable {
 

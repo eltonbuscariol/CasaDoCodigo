@@ -44,14 +44,14 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginVertical="5dp"
                     android:orientation="horizontal">
 
                     <android.support.design.widget.TextInputLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="50dp"
                         android:layout_height="wrap_content">
 
                         <EditText
@@ -59,13 +59,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/textColor"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
                             android:hint="0000"
-                            android:textColorHint="@color/textColor" />
+                            android:maxLength="4"
+                            android:singleLine="true"
+                            android:textColor="@color/textColor" />
 
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp">
 
@@ -75,12 +79,17 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/textColor"
                             android:hint="0000"
-                            android:textColorHint="@color/textColor" />
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLength="4"
+                            android:singleLine="true"
+                            android:textColor="@color/textColor"
+                            android:textColorHint="@color/colorAccentDark" />
 
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp">
 
@@ -90,12 +99,17 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/textColor"
                             android:hint="0000"
-                            android:textColorHint="@color/textColor" />
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLength="4"
+                            android:singleLine="true"
+                            android:textColor="@color/textColor"
+                            android:textColorHint="@color/colorAccentDark" />
 
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp">
 
@@ -105,7 +119,13 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/textColor"
                             android:hint="0000"
-                            android:textColorHint="@color/textColor" />
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLength="4"
+                            android:nextFocusForward="@id/txt_validade_cartao"
+                            android:singleLine="true"
+                            android:textColor="@color/textColor"
+                            android:textColorHint="@color/colorAccentDark" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -126,36 +146,39 @@
 
                     <EditText
                         android:id="@+id/txt_validade_cartao"
-                        android:layout_width="wrap_content"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="@color/textColor"
                         android:hint="00/00"
+                        android:imeOptions="actionNext"
+                        android:inputType="date"
+                        android:maxLength="5"
+                        android:nextFocusForward="@id/txt_nome_cartao"
+                        android:singleLine="true"
+                        android:textColor="@color/textColor"
                         android:textColorHint="@color/textColor" />
 
                 </android.support.design.widget.TextInputLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:orientation="horizontal">
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="100dp"
+                    android:layout_marginBottom="20dp">
 
-                    <android.support.design.widget.TextInputLayout
+                    <EditText
+                        android:id="@+id/txt_nome_cartao"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="5">
+                        android:backgroundTint="@color/textColor"
+                        android:hint="NOME COMPLETO"
+                        android:imeOptions="actionDone"
+                        android:singleLine="true"
+                        android:textColor="@color/textColor"
+                        android:textColorHint="@color/textColor" />
 
-                        <EditText
-                            android:id="@+id/txt_nome_cartao"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="NOME COMPLETO"
-                            android:textColorHint="@color/textColor" />
-
-                    </android.support.design.widget.TextInputLayout>
-
-
-                </LinearLayout>
+                </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
 

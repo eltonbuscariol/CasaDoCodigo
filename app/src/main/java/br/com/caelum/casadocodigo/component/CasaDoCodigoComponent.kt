@@ -2,6 +2,8 @@ package br.com.caelum.casadocodigo.component
 
 import br.com.caelum.casadocodigo.activity.CarrinhoActivity
 import br.com.caelum.casadocodigo.fragment.DetalhesLivroFragment
+import br.com.caelum.casadocodigo.fragment.FormularioCartaoFragment
+import br.com.caelum.casadocodigo.fragment.ListaCartoesFragment
 import br.com.caelum.casadocodigo.module.CasaDoCodigoModule
 import dagger.Component
 import javax.inject.Singleton
@@ -12,4 +14,6 @@ interface CasaDoCodigoComponent {
 
     fun inject(fragment: DetalhesLivroFragment)
     fun inject(activity: CarrinhoActivity)
+    fun inject(fragment: FormularioCartaoFragment)
+    fun inject(fragment: ListaCartoesFragment)
 }

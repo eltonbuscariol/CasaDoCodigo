@@ -1,5 +1,6 @@
 package br.com.caelum.casadocodigo.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -21,6 +22,11 @@ class CarrinhoActivity : AppCompatActivity() {
 
         val app = application as? CasaDoCodigoApplication
         app?.let { app.getComponent().inject(this) }
+
+        fab_carrinho.setOnClickListener {
+            val intent = Intent(this, CartaoActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onResume() {

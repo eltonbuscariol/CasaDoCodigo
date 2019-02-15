@@ -8,4 +8,5 @@
     <color name="colorAccentDark">#c56200</color>
     <color name="textColorAccent">#000000</color>
     <color name="textColor">#ffffff</color>
+    <color name="transparencyAccent">#50ff9100</color>
 </resources>
